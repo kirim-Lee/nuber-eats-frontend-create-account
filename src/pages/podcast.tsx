@@ -1,7 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import { faArrowLeft, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useMemo } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
@@ -14,7 +13,7 @@ import {
   PodcastQueryVariables,
   PodcastQuery_getPodcast_podcast,
 } from '../__generated__/PodcastQuery';
-import { meQuery_me_subsriptions } from '../__generated__/meQuery';
+import { SubscriptionButton } from '../components/subscription-button';
 
 const PODCAST = gql`
   query PodcastQuery($input: PodcastSearchInput!) {
@@ -89,15 +88,7 @@ export const Podcast = () => {
         <p>
           <Stars rating={podcast.rating} />
         </p>
-        {isSubscription(podcast.id, userInfo?.me?.subsriptions ?? []) ? (
-          <button className="text-xs rounded-full border border-pink-500 px-3 py-1 mt-2 text-gray-800 shadow">
-            subscribe +
-          </button>
-        ) : (
-          <button className="text-xs rounded-full bg-pink-500 px-3 py-1 mt-2 text-white shadow">
-            unsubscribe -
-          </button>
-        )}
+        <SubscriptionButton podcastId={podcast.id} />
       </div>
       <div className="border-b border-gray-800 opacity-20 mx-5" />
 
@@ -142,11 +133,4 @@ export const Podcast = () => {
   ) : (
     <div>podcast info is not exist</div>
   );
-};
-
-const isSubscription = (
-  subscriptionId: number,
-  subscriptions: meQuery_me_subsriptions[]
-) => {
-  return !!subscriptions.find((podcast) => podcast?.id === subscriptionId);
 };

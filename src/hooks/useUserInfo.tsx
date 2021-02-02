@@ -1,7 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { authTokenVar } from '../apollo';
-import { PODCAST_FRAGMENT } from '../fragment';
 import { meQuery } from '../__generated__/meQuery';
 
 const ME = gql`
@@ -11,11 +10,13 @@ const ME = gql`
       email
       role
       subsriptions {
-        ...PodcastPart
+        id
+      }
+      playedEpisodes {
+        id
       }
     }
   }
-  ${PODCAST_FRAGMENT}
 `;
 
 export const useUserInfo = () => {
