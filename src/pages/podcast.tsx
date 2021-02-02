@@ -14,6 +14,7 @@ import {
   PodcastQuery_getPodcast_podcast,
 } from '../__generated__/PodcastQuery';
 import { SubscriptionButton } from '../components/subscription-button';
+import { Episode } from '../components/episode';
 
 const PODCAST = gql`
   query PodcastQuery($input: PodcastSearchInput!) {
@@ -113,20 +114,7 @@ export const Podcast = () => {
           <span className="text-xs">episodes...</span>
         </h4>
         {podcast.episodes.map((episode) => {
-          return (
-            <div
-              key={episode.id}
-              className="relative rounded-md border-b border-gray-300 py-4"
-            >
-              <h4 className="font-light">{episode.title}</h4>
-              <h5 className="text-xs text-gray-500">
-                {episode.category} &middot; {getTimeAgo(episode.createdAt)}
-              </h5>
-              <button className="absolute right-2 top-5 focus:outline-none text-white rounded-full w-8 h-8 text-center flex justify-center items-center bg-pink-500 focus:bg-yellow-500 shadow-md transform scale-75">
-                <FontAwesomeIcon icon={faPlay} className="text-xs" />
-              </button>
-            </div>
-          );
+          return <Episode key={episode.id} episode={episode} />;
         })}
       </div>
     </div>
