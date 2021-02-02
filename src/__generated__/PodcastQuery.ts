@@ -19,6 +19,7 @@ export interface PodcastQuery_getPodcast_podcast_episodes {
   id: number;
   title: string;
   category: string;
+  createdAt: any;
 }
 
 export interface PodcastQuery_getPodcast_podcast_reviews_creator {
