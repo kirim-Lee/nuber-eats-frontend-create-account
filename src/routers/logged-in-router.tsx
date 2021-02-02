@@ -4,6 +4,8 @@ import { UserRole } from '../__generated__/globalTypes';
 import { Podcasts } from '../pages/podcasts';
 import { Podcast } from '../pages/podcast';
 import { Page404 } from '../pages/404';
+import { ErrorMessage } from '../components/error';
+import { Loading } from '../components/loading';
 
 const ClientRouter = () => [
   <Route exact={true} key="podcasts" path="/" component={Podcasts} />,
@@ -15,21 +17,11 @@ export const LoggedInRouter = () => {
   const { data, error, loading } = useUserInfo();
 
   if (loading) {
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <span className="font-medium text-xl tracking-wide">loading...</span>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (error?.message) {
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <span className="font-medium text-xl tracking-wide">
-          {error.message}
-        </span>
-      </div>
-    );
+    return <ErrorMessage message={error.message} />;
   }
 
   return (

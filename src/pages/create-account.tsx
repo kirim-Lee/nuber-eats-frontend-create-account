@@ -4,11 +4,12 @@ import {
   createAccount,
   createAccountVariables,
 } from '../__generated__/createAccount';
-import { CreateAccountInput, UserRole } from '../__generated__/globalTypes';
+
 import { Button } from '../components/button';
 import { FormError } from '../components/form-error';
 import { useHistory } from 'react-router-dom';
 import { EMAIL_PATTERN } from '../constants';
+import { CreateAccountInput, UserRole } from '../__generated__/globalTypes';
 
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccount($input: CreateAccountInput!) {
