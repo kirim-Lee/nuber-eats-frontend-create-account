@@ -7,6 +7,13 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum Category {
+  ECONOMY = "ECONOMY",
+  LANGUAGE = "LANGUAGE",
+  MUSIC = "MUSIC",
+  NONE = "NONE",
+}
+
 export enum UserRole {
   Host = "Host",
   Listener = "Listener",
@@ -16,6 +23,13 @@ export interface CreateAccountInput {
   email?: string | null;
   password?: string | null;
   role?: UserRole | null;
+}
+
+export interface CreatePodcastInput {
+  title: string;
+  category: Category;
+  coverImg?: string | null;
+  description: string;
 }
 
 export interface LoginInput {

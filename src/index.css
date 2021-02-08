@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+  @apply w-full max-w-screen-md mx-auto
+}
+
+.input-text{
+  @apply rounded-md bg-violet-200 text-white border-none text-sm px-3 py-2 focus:outline-none
+}

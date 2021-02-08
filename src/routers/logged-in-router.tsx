@@ -5,6 +5,7 @@ import { Podcasts } from '../pages/podcasts';
 import { Podcast } from '../pages/podcast';
 import { MyPodcasts } from '../pages/my-podcasts';
 import { MyPodcast } from '../pages/my-podcast';
+import { CreatePodcast } from '../pages/create-podcast';
 import { Page404 } from '../pages/404';
 import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
@@ -22,6 +23,7 @@ const ClientRouter: IRoute[] = [
 
 const HostRouter: IRoute[] = [
   { path: '/', component: MyPodcasts },
+  { path: '/create-podcast', component: CreatePodcast },
   { path: '/podcast/:id', component: MyPodcast },
 ];
 
@@ -42,7 +44,7 @@ export const LoggedInRouter = () => {
         {(data?.me.role === UserRole.Listener ? ClientRouter : HostRouter).map(
           (router) => (
             <Route
-              expact={true}
+              exact={true}
               key={router.path}
               path={router.path}
               component={router.component}
