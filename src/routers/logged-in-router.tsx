@@ -3,15 +3,27 @@ import { useUserInfo } from '../hooks/useUserInfo';
 import { UserRole } from '../__generated__/globalTypes';
 import { Podcasts } from '../pages/podcasts';
 import { Podcast } from '../pages/podcast';
+import { MyPodcasts } from '../pages/my-podcasts';
+import { MyPodcast } from '../pages/my-podcast';
 import { Page404 } from '../pages/404';
 import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
+import { React } from '@ungap/global-this';
 
-const ClientRouter = () => [
-  <Route exact={true} key="podcasts" path="/" component={Podcasts} />,
-  <Route exact={true} key="episodes" path="/podcast/:id" component={Podcast} />,
+interface IRoute {
+  path: string;
+  component: React.ComponentType;
+}
+
+const ClientRouter: IRoute[] = [
+  { path: '/', component: Podcasts },
+  { path: '"/podcast/:id', component: Podcast },
 ];
-const HostRouter = () => [];
+
+const HostRouter: IRoute[] = [
+  { path: '/', component: MyPodcasts },
+  { path: '/podcast/:id', component: MyPodcast },
+];
 
 export const LoggedInRouter = () => {
   const { data, error, loading } = useUserInfo();
@@ -27,7 +39,16 @@ export const LoggedInRouter = () => {
   return (
     <Router>
       <Switch>
-        {data?.me.role === UserRole.Listener ? ClientRouter() : HostRouter()}
+        {(data?.me.role === UserRole.Listener ? ClientRouter : HostRouter).map(
+          (router) => (
+            <Route
+              expact={true}
+              key={router.path}
+              path={router.path}
+              component={router.component}
+            />
+          )
+        )}
         <Route path="*" component={Page404} />
       </Switch>
     </Router>
