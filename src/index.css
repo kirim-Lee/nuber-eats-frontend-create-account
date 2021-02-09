@@ -16,8 +16,14 @@
 .button-black {
   @apply rounded-md bg-black shadow-md text-white text-xs px-3 py-1
 }
+.button-black-line {
+  @apply rounded-md border-gray-500 border shadow-md text-gray-700 text-xs px-3 py-1
+}
 .button-red {
   @apply rounded-md bg-red-500 shadow-md text-white text-xs px-3 py-1
+}
+.button-pink {
+  @apply rounded-md bg-pink-500 shadow-md text-white text-xs px-3 py-1
 }
 .button-gray {
   @apply rounded-md bg-gray-400 shadow-md text-white text-xs px-3 py-1

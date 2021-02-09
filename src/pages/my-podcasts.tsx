@@ -3,10 +3,9 @@ import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import { MyPodcastBox } from '../components/my-podcast-box';
 import { WHOLE_PODCAST_FRAGMENT } from '../fragment';
-import { getTimeAgo } from '../util';
 import { GetAllMyPodcastQuery } from '../__generated__/GetAllMyPodcastQuery';
 
-const MYPODCAST = gql`
+export const MYPODCAST = gql`
   query GetAllMyPodcastQuery {
     getAllMyPodcasts {
       ok

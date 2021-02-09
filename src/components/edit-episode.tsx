@@ -8,6 +8,7 @@ import {
   DeleteEpisodeMutation,
   DeleteEpisodeMutationVariables,
 } from '../__generated__/DeleteEpisodeMutation';
+import { Confirm } from './confirm';
 
 interface IProps {
   episodeId: number;
@@ -63,22 +64,11 @@ export const EditEpisode: React.FC<IProps> = ({ episodeId, podcastId }) => {
         Delete
       </button>
       {show && (
-        <div
-          className="fixed left-0 top-0 w-full h-full flex justify-center items-center"
-          style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
-        >
-          <div className="bg-white shadow-md rounded-md p-5">
-            <h1 className="text-xl font-thin">Are you sure delete? </h1>
-            <div className="flex justify-center mt-3">
-              <button className="button-gray mr-2" onClick={handleCancel}>
-                cancel
-              </button>
-              <button className="button-red" onClick={handleConfirm}>
-                confirm
-              </button>
-            </div>
-          </div>
-        </div>
+        <Confirm
+          text="Are you sure delete?"
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
       )}
     </div>
   );

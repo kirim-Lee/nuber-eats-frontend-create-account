@@ -12,6 +12,7 @@ import { Loading } from '../components/loading';
 import { React } from '@ungap/global-this';
 import { CreateEpisode } from '../pages/create-episode';
 import { EditEpisode } from '../pages/edit-episode';
+import { EditPodcast } from '../pages/edit-podcast';
 
 interface IRoute {
   path: string;
@@ -27,6 +28,7 @@ const HostRouter: IRoute[] = [
   { path: '/', component: MyPodcasts },
   { path: '/create-podcast', component: CreatePodcast },
   { path: '/podcast/:id', component: MyPodcast },
+  { path: '/podcast/:id/edit', component: EditPodcast },
   { path: '/podcast/:id/create-episode', component: CreateEpisode },
   {
     path: '/podcast/:podcastId/episode/:episodeId/edit',

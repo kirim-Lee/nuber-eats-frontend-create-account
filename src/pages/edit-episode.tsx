@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router';
 import { Button } from '../components/button';
 import { InputFile } from '../components/input-file';
+import { SelectCategory } from '../components/select-category';
 import { GetEpisode, GetEpisodeVariables } from '../__generated__/GetEpisode';
 import { Category, UpdateEpisodeInput } from '../__generated__/globalTypes';
 import {
@@ -119,7 +120,7 @@ export const EditEpisode = () => {
       };
 
       setUploading(false);
-      handleMuatate(newData);
+      handleMutate(newData);
     } else {
       const newData: UpdateEpisodeInput = {
         ...data,
@@ -130,11 +131,11 @@ export const EditEpisode = () => {
 
       delete newData.file;
 
-      handleMuatate(newData);
+      handleMutate(newData);
     }
   };
 
-  const handleMuatate = (input: UpdateEpisodeInput) => {
+  const handleMutate = (input: UpdateEpisodeInput) => {
     updateEpisode({ variables: { input } });
   };
 
@@ -156,13 +157,7 @@ export const EditEpisode = () => {
               placeholder="title"
               ref={register({ required: true })}
             />
-            <select ref={register} name="category" className="input-text">
-              {Object.keys(Category).map((option) => (
-                <option value={option} key={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+            <SelectCategory register={register} />
             <p className="text-sm text-blue-500 text-left">
               {data.getEpisode?.episode?.file?.split('/').splice(-1)}
             </p>

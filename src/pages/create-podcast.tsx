@@ -12,6 +12,7 @@ import {
 } from '../__generated__/CreatePodcastMutation';
 
 import { Category, CreatePodcastInput } from '../__generated__/globalTypes';
+import { MYPODCAST } from './my-podcasts';
 
 const CREATE_PODCAST = gql`
   mutation CreatePodcastMutation($input: CreatePodcastInput!) {
@@ -42,7 +43,11 @@ export const CreatePodcast = () => {
   const [creatPodcast, { data, loading }] = useMutation<
     CreatePodcastMutation,
     CreatePodcastMutationVariables
-  >(CREATE_PODCAST, { onCompleted, onError });
+  >(CREATE_PODCAST, {
+    onCompleted,
+    onError,
+    refetchQueries: [{ query: MYPODCAST }],
+  });
 
   const { watch, register, handleSubmit, formState } = useForm<FormType>({
     mode: 'onChange',
@@ -102,8 +107,7 @@ export const CreatePodcast = () => {
               </option>
             ))}
           </select>
-          <input
-            type="text"
+          <textarea
             className="input-text"
             name="description"
             placeholder="description"
