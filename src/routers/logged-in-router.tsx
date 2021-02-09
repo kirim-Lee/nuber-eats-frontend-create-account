@@ -21,7 +21,7 @@ interface IRoute {
 
 const ClientRouter: IRoute[] = [
   { path: '/', component: Podcasts },
-  { path: '"/podcast/:id', component: Podcast },
+  { path: '/podcast/:id', component: Podcast },
 ];
 
 const HostRouter: IRoute[] = [

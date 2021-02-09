@@ -9,6 +9,7 @@ import {
   MyPodcastQuery,
   MyPodcastQueryVariables,
 } from '../__generated__/MyPodcastQuery';
+import { Review } from '../components/review';
 
 export const MYPODCAST_QUERY = gql`
   query MyPodcastQuery($input: MyPodcastInput!) {
@@ -17,6 +18,9 @@ export const MYPODCAST_QUERY = gql`
       error
       podcast {
         ...WholePodcastPart
+        subscribers {
+          email
+        }
       }
     }
   }
@@ -34,8 +38,6 @@ export const MyPodcast = () => {
       variables: { input: { id: Number(id) } },
     }
   );
-
-  console.log(data);
 
   const podcast = data?.myPodcast?.podcast;
   return (
@@ -63,7 +65,28 @@ export const MyPodcast = () => {
                   key={episode.id}
                   edit={true}
                 />
-                // <div key={episode.id}>{episode.title}</div>
+              ))}
+            </div>
+            {/** listener */}
+            <div className="mt-5 py-3 px-3 -mx-2 bg-white rounded-md">
+              <h5 className="text-md font-light">
+                Listeners
+                <span className="text-xs text-gray-500">
+                  ({podcast.subscribers?.length || 0})
+                </span>
+              </h5>
+              {podcast.subscribers?.map((subscriber, index) => (
+                <p key={subscriber.email} className="text-xs text-gray-400">
+                  {subscriber.email} {index ? <>&middot;</> : null}
+                </p>
+              ))}
+            </div>
+
+            {/**reviews */}
+            <div className="mt-5 py-3 px-3 -mx-2 rounded-md bg-white">
+              <h5 className="text-md font-light mb-3">Recent Reivews</h5>
+              {podcast?.reviews?.map((review) => (
+                <Review key={review.id} review={review} />
               ))}
             </div>
           </>

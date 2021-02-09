@@ -27,6 +27,8 @@ export interface WholePodcastPart_reviews {
   id: number;
   title: string;
   text: string;
+  rating: number;
+  createdAt: any;
   creator: WholePodcastPart_reviews_creator;
 }
 

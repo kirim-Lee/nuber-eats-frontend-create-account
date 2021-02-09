@@ -25,6 +25,8 @@ export const WHOLE_PODCAST_FRAGMENT = gql`
       id
       title
       text
+      rating
+      createdAt
       creator {
         email
       }

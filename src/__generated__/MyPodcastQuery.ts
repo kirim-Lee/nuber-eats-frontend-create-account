@@ -27,7 +27,14 @@ export interface MyPodcastQuery_myPodcast_podcast_reviews {
   id: number;
   title: string;
   text: string;
+  rating: number;
+  createdAt: any;
   creator: MyPodcastQuery_myPodcast_podcast_reviews_creator;
+}
+
+export interface MyPodcastQuery_myPodcast_podcast_subscribers {
+  __typename: "User";
+  email: string;
 }
 
 export interface MyPodcastQuery_myPodcast_podcast {
@@ -41,6 +48,7 @@ export interface MyPodcastQuery_myPodcast_podcast {
   description: string;
   episodes: MyPodcastQuery_myPodcast_podcast_episodes[];
   reviews: MyPodcastQuery_myPodcast_podcast_reviews[];
+  subscribers: MyPodcastQuery_myPodcast_podcast_subscribers[];
 }
 
 export interface MyPodcastQuery_myPodcast {

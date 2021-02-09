@@ -27,6 +27,8 @@ export interface GetAllMyPodcastQuery_getAllMyPodcasts_podcasts_reviews {
   id: number;
   title: string;
   text: string;
+  rating: number;
+  createdAt: any;
   creator: GetAllMyPodcastQuery_getAllMyPodcasts_podcasts_reviews_creator;
 }
 
