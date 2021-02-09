@@ -21,6 +21,8 @@ export interface allPodcastQuery_getAllPodcasts_podcasts {
   updatedAt: any;
   rating: number;
   category: Category;
+  coverImg: string | null;
+  description: string;
   creator: allPodcastQuery_getAllPodcasts_podcasts_creator;
 }
 

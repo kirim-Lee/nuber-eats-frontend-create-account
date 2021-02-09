@@ -9,11 +9,6 @@ import { PodcastSearchInput, Category } from "./globalTypes";
 // GraphQL query operation: PodcastQuery
 // ====================================================
 
-export interface PodcastQuery_getPodcast_podcast_creator {
-  __typename: "User";
-  email: string;
-}
-
 export interface PodcastQuery_getPodcast_podcast_episodes {
   __typename: "Episode";
   id: number;
@@ -35,6 +30,11 @@ export interface PodcastQuery_getPodcast_podcast_reviews {
   creator: PodcastQuery_getPodcast_podcast_reviews_creator;
 }
 
+export interface PodcastQuery_getPodcast_podcast_creator {
+  __typename: "User";
+  email: string;
+}
+
 export interface PodcastQuery_getPodcast_podcast {
   __typename: "Podcast";
   id: number;
@@ -42,9 +42,11 @@ export interface PodcastQuery_getPodcast_podcast {
   updatedAt: any;
   rating: number;
   category: Category;
-  creator: PodcastQuery_getPodcast_podcast_creator;
+  coverImg: string | null;
+  description: string;
   episodes: PodcastQuery_getPodcast_podcast_episodes[];
   reviews: PodcastQuery_getPodcast_podcast_reviews[];
+  creator: PodcastQuery_getPodcast_podcast_creator;
 }
 
 export interface PodcastQuery_getPodcast {

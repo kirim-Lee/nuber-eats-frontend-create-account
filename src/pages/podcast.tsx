@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
 import { Stars } from '../components/start';
-import { PODCAST_FRAGMENT } from '../fragment';
+import { PODCAST_FRAGMENT, WHOLE_PODCAST_FRAGMENT } from '../fragment';
 import { useUserInfo } from '../hooks/useUserInfo';
 import { getTimeAgo } from '../util';
 import {
@@ -16,31 +16,20 @@ import {
 import { SubscriptionButton } from '../components/subscription-button';
 import { Episode } from '../components/episode';
 
-const PODCAST = gql`
+export const PODCAST = gql`
   query PodcastQuery($input: PodcastSearchInput!) {
     getPodcast(input: $input) {
       ok
       error
       podcast {
-        ...PodcastPart
-        episodes {
-          id
-          title
-          category
-          createdAt
-        }
-        reviews {
-          id
-          title
-          text
-          creator {
-            email
-          }
+        ...WholePodcastPart
+        creator {
+          email
         }
       }
     }
   }
-  ${PODCAST_FRAGMENT}
+  ${WHOLE_PODCAST_FRAGMENT}
 `;
 
 type ParamType = {

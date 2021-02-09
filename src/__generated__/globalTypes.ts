@@ -41,6 +41,10 @@ export interface MarkEpisodeAsPlayedInput {
   id: number;
 }
 
+export interface MyPodcastInput {
+  id: number;
+}
+
 export interface PodcastSearchInput {
   id: number;
 }

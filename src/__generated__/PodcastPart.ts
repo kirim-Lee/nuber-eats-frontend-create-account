@@ -9,11 +9,6 @@ import { Category } from "./globalTypes";
 // GraphQL fragment: PodcastPart
 // ====================================================
 
-export interface PodcastPart_creator {
-  __typename: "User";
-  email: string;
-}
-
 export interface PodcastPart {
   __typename: "Podcast";
   id: number;
@@ -21,5 +16,6 @@ export interface PodcastPart {
   updatedAt: any;
   rating: number;
   category: Category;
-  creator: PodcastPart_creator;
+  coverImg: string | null;
+  description: string;
 }

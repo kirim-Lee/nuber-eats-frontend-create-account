@@ -20,6 +20,9 @@ const ALL_PODCASTS = gql`
       error
       podcasts {
         ...PodcastPart
+        creator {
+          email
+        }
       }
     }
   }

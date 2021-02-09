@@ -7,8 +7,28 @@ export const PODCAST_FRAGMENT = gql`
     updatedAt
     rating
     category
-    creator {
-      email
+    coverImg
+    description
+  }
+`;
+
+export const WHOLE_PODCAST_FRAGMENT = gql`
+  fragment WholePodcastPart on Podcast {
+    ...PodcastPart
+    episodes {
+      id
+      title
+      category
+      createdAt
+    }
+    reviews {
+      id
+      title
+      text
+      creator {
+        email
+      }
     }
   }
+  ${PODCAST_FRAGMENT}
 `;

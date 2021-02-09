@@ -9,3 +9,7 @@
 .input-text{
   @apply rounded-md bg-violet-200 text-white border-none text-sm px-3 py-2 focus:outline-none
 }
+
+.button {
+  @apply rounded-md bg-violet-300 shadow-md text-white text-xs px-3 py-1
+}
