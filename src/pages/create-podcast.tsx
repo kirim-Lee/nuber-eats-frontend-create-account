@@ -51,7 +51,7 @@ export const CreatePodcast = () => {
   const file: FileList = watch('file');
 
   const onSubmit = async (data: FormType) => {
-    if (data.file) {
+    if (data.file && data.file[0]) {
       const form = new FormData();
       form.append('file', file[0]);
       setUploading(true);

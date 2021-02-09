@@ -11,6 +11,7 @@ import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
 import { React } from '@ungap/global-this';
 import { CreateEpisode } from '../pages/create-episode';
+import { EditEpisode } from '../pages/edit-episode';
 
 interface IRoute {
   path: string;
@@ -27,6 +28,10 @@ const HostRouter: IRoute[] = [
   { path: '/create-podcast', component: CreatePodcast },
   { path: '/podcast/:id', component: MyPodcast },
   { path: '/podcast/:id/create-episode', component: CreateEpisode },
+  {
+    path: '/podcast/:podcastId/episode/:episodeId/edit',
+    component: EditEpisode,
+  },
 ];
 
 export const LoggedInRouter = () => {

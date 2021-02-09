@@ -45,6 +45,10 @@ export interface EpisodesSearchInput {
   episodeId: number;
 }
 
+export interface GetEpisodeInput {
+  episodeId: number;
+}
+
 export interface LoginInput {
   email: string;
   password: string;
@@ -64,6 +68,15 @@ export interface PodcastSearchInput {
 
 export interface ToggleSubscribeInput {
   podcastId: number;
+}
+
+export interface UpdateEpisodeInput {
+  title?: string | null;
+  category?: Category | null;
+  file?: string | null;
+  fileSize?: number | null;
+  podcastId: number;
+  episodeId: number;
 }
 
 //==============================================================
