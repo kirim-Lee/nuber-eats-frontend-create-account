@@ -1,9 +1,11 @@
 import { fromError, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { Button } from '../components/button';
 import { FormError } from '../components/form-error';
+import { InputFile } from '../components/input-file';
 import {
   CreatePodcastMutation,
   CreatePodcastMutationVariables,
@@ -31,6 +33,8 @@ export const CreatePodcast = () => {
     }
   };
 
+  const [uploading, setUploading] = useState(false);
+
   const onError = (error) => {
     console.log(error);
   };
@@ -50,6 +54,7 @@ export const CreatePodcast = () => {
     if (data.file) {
       const form = new FormData();
       form.append('file', file[0]);
+      setUploading(true);
 
       const { url } = await (
         await fetch('http://localhost:4000/uploads', {
@@ -61,6 +66,7 @@ export const CreatePodcast = () => {
       data.coverImg = url;
       delete data.file;
 
+      setUploading(false);
       handleMuatate(data);
     } else {
       handleMuatate(data);
@@ -71,7 +77,6 @@ export const CreatePodcast = () => {
     creatPodcast({ variables: { input: data } });
   };
 
-  console.log(file);
   return (
     <div className="container flex justify-center items-center h-screen">
       <div className="rounded-xl max-w-screen-md w-8/12 bg-blue-100 px-5 py-3 box-content shadow-md">
@@ -105,30 +110,11 @@ export const CreatePodcast = () => {
             ref={register({ required: true })}
           />
 
-          <div className="relative">
-            <input
-              type="file"
-              className="hidden"
-              name="file"
-              id="file"
-              ref={register}
-            />
-            <label
-              htmlFor="file"
-              className="rounded-full bg-blue-500 text-white py-2 px-5 text-sm absolute right-0 top-0 shadow-md"
-            >
-              add file
-            </label>
-            <input
-              type="text"
-              className="py-2 bg-blue-300 rounded-md float-left pl-3 pr-10 text-sm text-white"
-              readOnly
-              value={file?.[0]?.name ?? ''}
-            />
-          </div>
+          <InputFile file={file} register={register} />
+
           <Button
             isValid={formState.isValid}
-            loading={loading}
+            loading={loading || uploading}
             text={'Create Podcast'}
           />
           {data?.createPodcast?.error && (

@@ -10,9 +10,12 @@ import {
 } from '../__generated__/MarkEpisodePlayed';
 import { meQuery_me_playedEpisodes } from '../__generated__/meQuery';
 import { PodcastQuery_getPodcast_podcast_episodes } from '../__generated__/PodcastQuery';
+import { EditEpisode } from './edit-episode';
 
 interface IProps {
   episode: PodcastQuery_getPodcast_podcast_episodes;
+  podcastId: string;
+  edit?: boolean;
 }
 
 const MARK_EPISODE_PLAYED = gql`
@@ -23,7 +26,7 @@ const MARK_EPISODE_PLAYED = gql`
   }
 `;
 
-export const Episode = ({ episode }: IProps) => {
+export const Episode = ({ episode, edit, podcastId }: IProps) => {
   const { data: userInfo } = useUserInfo();
   const [marked, setMarked] = useState(
     isMarked(episode.id, userInfo?.me?.playedEpisodes)
@@ -41,7 +44,10 @@ export const Episode = ({ episode }: IProps) => {
   >(MARK_EPISODE_PLAYED, { onCompleted });
 
   const handleMark = () => {
-    markPlayed({ variables: { input: { id: episode.id } } });
+    if (!edit) {
+      // just listener
+      markPlayed({ variables: { input: { id: episode.id } } });
+    }
   };
 
   return (
@@ -63,6 +69,9 @@ export const Episode = ({ episode }: IProps) => {
       >
         <FontAwesomeIcon icon={faPlay} className="text-xs" />
       </button>
+      {edit && (
+        <EditEpisode episodeId={episode.id} podcastId={Number(podcastId)} />
+      )}
     </div>
   );
 };

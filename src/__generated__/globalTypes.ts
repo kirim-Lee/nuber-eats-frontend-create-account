@@ -25,11 +25,24 @@ export interface CreateAccountInput {
   role?: UserRole | null;
 }
 
+export interface CreateEpisodeInput {
+  title: string;
+  category: Category;
+  file: string;
+  fileSize?: number | null;
+  podcastId: number;
+}
+
 export interface CreatePodcastInput {
   title: string;
   category: Category;
   coverImg?: string | null;
   description: string;
+}
+
+export interface EpisodesSearchInput {
+  podcastId: number;
+  episodeId: number;
 }
 
 export interface LoginInput {

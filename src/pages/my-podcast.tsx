@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Episode } from '../components/episode';
 import { MyPodcastBox } from '../components/my-podcast-box';
 import { WHOLE_PODCAST_FRAGMENT } from '../fragment';
 import {
@@ -9,7 +10,7 @@ import {
   MyPodcastQueryVariables,
 } from '../__generated__/MyPodcastQuery';
 
-const MYPODCAST_QUERY = gql`
+export const MYPODCAST_QUERY = gql`
   query MyPodcastQuery($input: MyPodcastInput!) {
     myPodcast(input: $input) {
       ok
@@ -46,15 +47,21 @@ export const MyPodcast = () => {
         {podcast && (
           <>
             <MyPodcastBox podcast={podcast} />
-            <div className="mt-5">
-              <div className="flex justify-between">
+            <div className="mt-5 py-3 px-3 -mx-2 bg-white rounded-md">
+              <div className="flex justify-between mb-2 shadow-sm p-2 pt-0">
                 <h5 className="text-md font-light">Episodes</h5>
                 <Link to={`/podcast/${id}/create-episode`} className="button">
                   Create Episode
                 </Link>
               </div>
               {podcast.episodes?.map((episode) => (
-                <div key={episode.id}>{episode.title}</div>
+                <Episode
+                  podcastId={id}
+                  episode={episode}
+                  key={episode.id}
+                  edit={true}
+                />
+                // <div key={episode.id}>{episode.title}</div>
               ))}
             </div>
           </>

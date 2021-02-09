@@ -13,3 +13,12 @@
 .button {
   @apply rounded-md bg-violet-300 shadow-md text-white text-xs px-3 py-1
 }
+.button-black {
+  @apply rounded-md bg-black shadow-md text-white text-xs px-3 py-1
+}
+.button-red {
+  @apply rounded-md bg-red-500 shadow-md text-white text-xs px-3 py-1
+}
+.button-gray {
+  @apply rounded-md bg-gray-400 shadow-md text-white text-xs px-3 py-1
+}

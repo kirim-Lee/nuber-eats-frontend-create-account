@@ -103,7 +103,7 @@ export const Podcast = () => {
           <span className="text-xs">episodes...</span>
         </h4>
         {podcast.episodes.map((episode) => {
-          return <Episode key={episode.id} episode={episode} />;
+          return <Episode key={episode.id} episode={episode} podcastId={id} />;
         })}
       </div>
     </div>
