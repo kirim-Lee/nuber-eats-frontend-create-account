@@ -12,8 +12,9 @@ Created with CodeSandbox
 
 - [x] See Podcast Categories
 - [x] Search Podcasts
-- [ ] See Podcast + Episodes
+- [x] See Podcast + Episodes
 - [ ] Review Podcast
-- [ ] Subscribe to a Podcast
+- [x] Subscribe to a Podcast
 - [ ] See Subscriptions
 - [ ] See Feed (Episodes of Podcasts the user is subscribed to combined)
+- [x] audio play

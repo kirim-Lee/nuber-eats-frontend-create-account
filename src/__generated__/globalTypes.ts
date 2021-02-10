@@ -40,6 +40,13 @@ export interface CreatePodcastInput {
   description: string;
 }
 
+export interface CreateReviewInput {
+  title: string;
+  text: string;
+  rating: number;
+  podcastId: number;
+}
+
 export interface EpisodesSearchInput {
   podcastId: number;
   episodeId: number;

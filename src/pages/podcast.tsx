@@ -1,11 +1,11 @@
-import { gql, useQuery } from '@apollo/client';
+import { fromPromise, gql, useQuery } from '@apollo/client';
 import { faArrowLeft, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory, useParams } from 'react-router-dom';
 import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
 import { Stars } from '../components/stars';
-import { PODCAST_FRAGMENT, WHOLE_PODCAST_FRAGMENT } from '../fragment';
+import { WHOLE_PODCAST_FRAGMENT } from '../fragment';
 import { useUserInfo } from '../hooks/useUserInfo';
 import { getTimeAgo } from '../util';
 import {
@@ -15,6 +15,8 @@ import {
 } from '../__generated__/PodcastQuery';
 import { SubscriptionButton } from '../components/subscription-button';
 import { Episode } from '../components/episode';
+import { AddReview } from '../components/add-review';
+import { Review } from '../components/review';
 
 export const PODCAST = gql`
   query PodcastQuery($input: PodcastSearchInput!) {
@@ -84,18 +86,19 @@ export const Podcast = () => {
       </div>
       <div className="border-b border-gray-800 opacity-20 mx-5" />
 
-      {recentReview ? (
-        <p className="p-5 text-sm font-light text-gray-800">
-          {recentReview?.text} ...
-          <span className="text-xs text-gray-600">
-            by {recentReview?.creator?.email}
-          </span>
-        </p>
-      ) : (
-        <p className="text-center text-sm p-10 text-gray-600 font-light">
-          no reviews...
-        </p>
-      )}
+      <AddReview podcastId={Number(id)} />
+      <div className="px-4">
+        <h3 className="text-md font-thin">Recent Review</h3>
+        {recentReview ? (
+          <div className="my-3 p-3 bg-white rounded-lg bg-opacity-50">
+            <Review review={recentReview} nobg={true} />
+          </div>
+        ) : (
+          <p className="text-center text-sm p-10 text-gray-600 font-light">
+            no reviews...
+          </p>
+        )}
+      </div>
 
       <div className="border-b border-gray-800 opacity-20 mx-5" />
 

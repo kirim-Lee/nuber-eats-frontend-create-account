@@ -25,6 +25,10 @@
 .button-pink {
   @apply rounded-md bg-pink-500 shadow-md text-white text-xs px-3 py-1
 }
+.button-pink[disabled] {
+  @apply bg-gray-200
+}
+
 .button-gray {
   @apply rounded-md bg-gray-400 shadow-md text-white text-xs px-3 py-1
 }
