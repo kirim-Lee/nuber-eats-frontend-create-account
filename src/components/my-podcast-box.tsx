@@ -4,9 +4,19 @@ import { MyPodcastQuery_myPodcast_podcast } from '../__generated__/MyPodcastQuer
 import { Stars } from './start';
 import { React } from '@ungap/global-this';
 import { EditPodcast } from './edit-podcast';
+import { Category } from '../__generated__/globalTypes';
 
+interface IPodcast {
+  title: string;
+  description: string;
+  category: Category;
+  updatedAt: string;
+  rating?: number;
+  coverImg?: string;
+  id: number;
+}
 interface IProps {
-  podcast: WholePodcastPart | MyPodcastQuery_myPodcast_podcast;
+  podcast: IPodcast;
   edit?: boolean;
 }
 export const MyPodcastBox: React.FC<IProps> = ({ podcast, edit }) => {

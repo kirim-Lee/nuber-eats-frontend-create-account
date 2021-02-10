@@ -10,8 +10,7 @@ import {
 import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Stars } from '../components/start';
-import { getTimeAgo } from '../util';
+import { MyPodcastBox } from '../components/my-podcast-box';
 
 const ALL_PODCASTS = gql`
   query allPodcastQuery {
@@ -55,36 +54,19 @@ export const Podcasts = () => {
           </span>
         </div>
       </div>
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto px-5 py-3 rounded bg-rose-100 bg-opacity-50 mx-2">
         {data?.getAllPodcasts.podcasts?.map((podcast: Podcast) => {
-          return <PodcastCard podcast={podcast} key={podcast.id} />;
+          return (
+            <Link
+              to={`/podcast/${podcast.id}`}
+              className="block border-b py-2 border-red-300"
+              key={podcast.id}
+            >
+              <MyPodcastBox podcast={podcast} />
+            </Link>
+          );
         })}
       </div>
     </div>
   );
 };
-
-interface IPodcastCard {
-  podcast: Podcast;
-}
-const PodcastCard: React.FC<IPodcastCard> = ({ podcast }) => (
-  <Link
-    key={podcast.id}
-    to={`/podcast/${podcast.id}`}
-    className="mx-5 my-2 py-3 px-5 bg-white rounded-md shadow-md opacity-80 hover:opacity-100 transition-opacity block"
-  >
-    <div>
-      <h4 className="text-xl font-light pb-2 mb-2 border-b border-gray-200">
-        {podcast.title}
-      </h4>
-      <div className="opacity-70 text-xs">
-        <span className="text-red-400">{podcast.category}</span> &middot;{' '}
-        <span>{podcast.creator.email}</span> &middot;{' '}
-        <span>{getTimeAgo(podcast.updatedAt)}</span>
-      </div>
-      <div>
-        <Stars rating={podcast.rating} />
-      </div>
-    </div>
-  </Link>
-);

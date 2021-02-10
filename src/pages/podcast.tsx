@@ -59,7 +59,9 @@ export const Podcast = () => {
 
   const podcast: PodcastType = data?.getPodcast?.podcast ?? null;
 
-  const recentReview = data?.getPodcast.podcast?.reviews?.reverse()[0];
+  const recentReview = Array.from(
+    data?.getPodcast?.podcast?.reviews || []
+  ).reverse()[0];
 
   return podcast ? (
     <div className="h-screen flex flex-col bg-gradient-to-bl from-pink-200 via-gray-100 to-gray-100">

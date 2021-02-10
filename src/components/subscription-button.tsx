@@ -51,7 +51,7 @@ export const SubscriptionButton = ({ podcastId }: IProps) => {
       onClick={handleToggle}
       disabled={loading}
     >
-      {loading ? 'loading...' : 'subscribe +'}
+      {loading ? 'loading...' : 'unsubscribe -'}
     </button>
   ) : (
     <button
@@ -59,7 +59,7 @@ export const SubscriptionButton = ({ podcastId }: IProps) => {
       onClick={handleToggle}
       disabled={loading}
     >
-      {loading ? 'loading...' : 'unsubscribe -'}
+      {loading ? 'loading...' : 'subscribe +'}
     </button>
   );
 };
