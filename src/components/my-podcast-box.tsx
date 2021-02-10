@@ -1,7 +1,7 @@
 import { getTimeAgo } from '../util';
 import { WholePodcastPart } from '../__generated__/WholePodcastPart';
 import { MyPodcastQuery_myPodcast_podcast } from '../__generated__/MyPodcastQuery';
-import { Stars } from './start';
+import { Stars } from './stars';
 import { React } from '@ungap/global-this';
 import { EditPodcast } from './edit-podcast';
 import { Category } from '../__generated__/globalTypes';

@@ -1,7 +1,7 @@
 import { React } from '@ungap/global-this';
 import { getTimeAgo } from '../util';
 import { WholePodcastPart_reviews } from '../__generated__/WholePodcastPart';
-import { Stars } from './start';
+import { Stars } from './stars';
 
 interface IProps {
   review: WholePodcastPart_reviews;

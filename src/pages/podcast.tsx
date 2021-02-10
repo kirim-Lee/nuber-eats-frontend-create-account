@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory, useParams } from 'react-router-dom';
 import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
-import { Stars } from '../components/start';
+import { Stars } from '../components/stars';
 import { PODCAST_FRAGMENT, WHOLE_PODCAST_FRAGMENT } from '../fragment';
 import { useUserInfo } from '../hooks/useUserInfo';
 import { getTimeAgo } from '../util';

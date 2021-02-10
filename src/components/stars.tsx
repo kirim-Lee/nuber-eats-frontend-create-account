@@ -34,7 +34,7 @@ export const Stars: React.FC<IStar> = ({ rating, small }) => {
             <FontAwesomeIcon
               icon={faStarLine}
               key={index}
-              className={`text-gray-200 ${textSize}`}
+              className={`text-violet-300 ${textSize}`}
             />
           );
         })}

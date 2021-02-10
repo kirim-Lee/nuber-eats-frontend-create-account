@@ -10,8 +10,8 @@ Created with CodeSandbox
 - [x] Edit an Episode
 - [x] Delete an Episode
 
-- [ ] See Podcast Categories
-- [ ] Search Podcasts
+- [x] See Podcast Categories
+- [x] Search Podcasts
 - [ ] See Podcast + Episodes
 - [ ] Review Podcast
 - [ ] Subscribe to a Podcast
