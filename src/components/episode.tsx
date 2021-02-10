@@ -1,7 +1,7 @@
 import { gql, useMutation } from '@apollo/client';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUserInfo } from '../hooks/useUserInfo';
 import { getTimeAgo } from '../util';
 import {
@@ -26,7 +26,17 @@ const MARK_EPISODE_PLAYED = gql`
   }
 `;
 
+interface IAudio {
+  duration: number;
+  currentTime: number;
+}
+
+const InitialAudio: IAudio = { duration: 0, currentTime: 0 };
+
 export const Episode = ({ episode, edit, podcastId }: IProps) => {
+  const [audio, setAudio] = useState<HTMLAudioElement>();
+  const [audioInfo, setAudioInfo] = useState<IAudio>(InitialAudio);
+
   const { data: userInfo } = useUserInfo();
   const [marked, setMarked] = useState(
     isMarked(episode.id, userInfo?.me?.playedEpisodes)
@@ -43,12 +53,44 @@ export const Episode = ({ episode, edit, podcastId }: IProps) => {
     MarkEpisodePlayedVariables
   >(MARK_EPISODE_PLAYED, { onCompleted });
 
-  const handleMark = () => {
+  const handleClickPlayButton = () => {
+    if (audio) {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    } else {
+      const newAudio = new Audio(episode.file);
+
+      setAudio(newAudio);
+      setAudioInfo({ currentTime: 0, duration: newAudio.duration });
+      newAudio.play();
+    }
+
     if (!edit) {
       // just listener
       markPlayed({ variables: { input: { id: episode.id } } });
     }
   };
+
+  useEffect(() => {
+    const timeUpdateEvent = () => {
+      setAudioInfo({
+        currentTime: audio?.currentTime ?? 0,
+        duration: audio?.duration ?? 0,
+      });
+    };
+    if (audio) {
+      audio.addEventListener('timeupdate', timeUpdateEvent);
+    }
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.removeEventListener('timeupdate', timeUpdateEvent);
+      }
+    };
+  }, [audio]);
 
   return (
     <div
@@ -64,16 +106,53 @@ export const Episode = ({ episode, edit, podcastId }: IProps) => {
       {marked && <p className="text-gray-400 text-xs">you had played..</p>}
       <button
         className="absolute right-2 top-5 focus:outline-none text-white rounded-full w-8 h-8 text-center flex justify-center items-center bg-pink-500 focus:bg-yellow-500 shadow-md transform scale-75"
-        onClick={handleMark}
-        disabled={marked || loading}
+        onClick={handleClickPlayButton}
+        disabled={loading}
       >
-        <FontAwesomeIcon icon={faPlay} className="text-xs" />
+        {audio && audio.paused ? (
+          <FontAwesomeIcon icon={faPause} className="text-xs" />
+        ) : (
+          <FontAwesomeIcon icon={faPlay} className="text-xs" />
+        )}
       </button>
+      {audio && (
+        <div className="mt-2">
+          <div className="pt-1 rounded-full bg-gray-400 relative">
+            <span
+              className="pt-1 absolute left-0 top-0 bg-pink-400 rounded-full"
+              style={{ width: `${getAudioPlayed(audioInfo)}%` }}
+            />
+          </div>
+          <span className="text-xs text-gray-400">
+            <span className="text-pink-400">
+              {getPlayTime(audioInfo.currentTime)}
+            </span>{' '}
+            / {getPlayTime(audioInfo.duration)}
+          </span>
+        </div>
+      )}
       {edit && (
         <EditEpisode episodeId={episode.id} podcastId={Number(podcastId)} />
       )}
     </div>
   );
+};
+
+const getAudioPlayed = ({ duration, currentTime }: IAudio): number => {
+  if (!currentTime || !duration) {
+    return 0;
+  }
+
+  return Number((currentTime / duration).toFixed(2)) * 100;
+};
+
+const getPlayTime = (duration: number): string => {
+  const second = Math.ceil(duration);
+  const min = Math.floor(second / 60);
+
+  return !duration
+    ? '0 sec'
+    : `${min ? `${min} min` : ''} ${second - min * 60} sec`;
 };
 
 const isMarked = (

@@ -15,6 +15,8 @@ export interface GetAllMyPodcastQuery_getAllMyPodcasts_podcasts_episodes {
   title: string;
   category: Category;
   createdAt: any;
+  file: string;
+  fileSize: number | null;
 }
 
 export interface GetAllMyPodcastQuery_getAllMyPodcasts_podcasts_reviews_creator {

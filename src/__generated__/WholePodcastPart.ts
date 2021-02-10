@@ -15,6 +15,8 @@ export interface WholePodcastPart_episodes {
   title: string;
   category: Category;
   createdAt: any;
+  file: string;
+  fileSize: number | null;
 }
 
 export interface WholePodcastPart_reviews_creator {

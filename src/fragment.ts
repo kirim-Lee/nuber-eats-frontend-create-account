@@ -20,6 +20,8 @@ export const WHOLE_PODCAST_FRAGMENT = gql`
       title
       category
       createdAt
+      file
+      fileSize
     }
     reviews {
       id
