@@ -18,6 +18,11 @@ export const Stars: React.FC<IStar> = ({ rating, small, onClick }) => {
 
   return (
     <>
+      <div className="hidden">
+        <span className="text-pink-500" />
+        <span className="text-pink-600" />
+        <span className="text-pink-700" />
+      </div>
       {Array(Math.floor(rating))
         .fill(0)
         .map((v, index) => {

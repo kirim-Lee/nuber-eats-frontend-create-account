@@ -6,7 +6,6 @@ import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
 import { Stars } from '../components/stars';
 import { WHOLE_PODCAST_FRAGMENT } from '../fragment';
-import { useUserInfo } from '../hooks/useUserInfo';
 import { getTimeAgo } from '../util';
 import {
   PodcastQuery,
@@ -41,7 +40,6 @@ type ParamType = {
 type PodcastType = PodcastQuery_getPodcast_podcast | null;
 
 export const Podcast = () => {
-  const { data: userInfo } = useUserInfo();
   const history = useHistory();
   const { id } = useParams<ParamType>();
   const { data, loading, error } = useQuery<
@@ -74,14 +72,25 @@ export const Podcast = () => {
       </div>
 
       <div className="p-5 ">
-        <h1 className="text-2xl font-light">{podcast.title}</h1>
-        <p className="opacity-70 text-xs pt-1">
-          <span className="text-indigo-500">{podcast.category}</span> &middot;{' '}
-          {podcast.creator.email} &middot; {getTimeAgo(podcast.updatedAt)}
-        </p>
-        <p>
-          <Stars rating={podcast.rating} />
-        </p>
+        <div className="flex justify-between">
+          <div>
+            <h1 className="text-2xl font-light">{podcast.title}</h1>
+            <p className="opacity-70 text-xs pt-1">
+              <span className="text-indigo-500">{podcast.category}</span>{' '}
+              &middot; {podcast.creator.email} &middot;{' '}
+              {getTimeAgo(podcast.updatedAt)}
+            </p>
+            <p>
+              <Stars rating={podcast.rating} />
+            </p>
+          </div>
+          <div>
+            <div
+              className="p-10 bg-center bg-cover rounded"
+              style={{ backgroundImage: `url(${podcast?.coverImg})` }}
+            />
+          </div>
+        </div>
         <SubscriptionButton podcastId={podcast.id} />
       </div>
       <div className="border-b border-gray-800 opacity-20 mx-5" />
