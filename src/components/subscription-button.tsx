@@ -6,7 +6,7 @@ import {
   ToggleSubscription,
   ToggleSubscriptionVariables,
 } from '../__generated__/ToggleSubscription';
-
+import { ALL_PODCASTS } from '../pages/podcasts';
 interface IProps {
   podcastId: number;
 }
@@ -35,7 +35,10 @@ export const SubscriptionButton = ({ podcastId }: IProps) => {
   const [toggleSubscribe, { loading }] = useMutation<
     ToggleSubscription,
     ToggleSubscriptionVariables
-  >(TOGGLE_SUBSCRIPTION, { onCompleted });
+  >(TOGGLE_SUBSCRIPTION, {
+    onCompleted,
+    refetchQueries: [{ query: ALL_PODCASTS }],
+  });
 
   const handleToggle = () => {
     toggleSubscribe({ variables: { input: { podcastId } } });

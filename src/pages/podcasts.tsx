@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom';
 import { ErrorMessage } from '../components/error';
 import { Loading } from '../components/loading';
 import { PODCAST_FRAGMENT } from '../fragment';
-import {
-  allPodcastQuery,
-  allPodcastQuery_getAllPodcasts_podcasts,
-} from '../__generated__/allPodcastQuery';
 import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { MyPodcastBox } from '../components/my-podcast-box';
 import { Category, SearchPodcastsInput } from '../__generated__/globalTypes';
 import {
+  allPodcastQuery,
+  allPodcastQuery_getAllPodcasts_podcasts,
+  allPodcastQuery_subscriptions,
+} from '../__generated__/allPodcastQuery';
+import {
   searchPodcastsQuery,
   searchPodcastsQueryVariables,
 } from '../__generated__/searchPodcastsQuery';
 import { useForm } from 'react-hook-form';
 
-const ALL_PODCASTS = gql`
+export const ALL_PODCASTS = gql`
   query allPodcastQuery {
     getAllPodcasts {
       ok
@@ -30,7 +31,12 @@ const ALL_PODCASTS = gql`
         }
       }
     }
+
+    subscriptions {
+      ...PodcastPart
+    }
   }
+
   ${PODCAST_FRAGMENT}
 `;
 
@@ -102,7 +108,7 @@ export const Podcasts = () => {
       : searchData?.searchPodcasts?.podcasts;
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-blue-100 via-pink-300 to-yellow-400 ">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-100 via-pink-300 to-yellow-400 pb-2">
       <h1 className="text-4xl p-5 font-medium">
         Podcasts <FontAwesomeIcon icon={faMeteor} className="text-yellow-600" />
       </h1>
@@ -144,7 +150,25 @@ export const Podcasts = () => {
           </button>
         ))}
       </div>
-      <div className="overflow-y-auto px-5 py-3 rounded bg-rose-100 bg-opacity-50 mx-2">
+      <div className="mb-3 rounded-md py-2 px-3 mx-2 border border-rose-200 ">
+        <h3 className="text-md font-thin mb-2">My Subscriptions</h3>
+        <div className="pb-1">
+          {data?.subscriptions?.map(
+            (podcast: allPodcastQuery_subscriptions) => {
+              return (
+                <Link
+                  to={`/podcast/${podcast.id}`}
+                  className="block py-2 px-3 bg-white bg-opacity-40 rounded-md my-1"
+                  key={podcast.id}
+                >
+                  <MyPodcastBox podcast={podcast} />
+                </Link>
+              );
+            }
+          )}
+        </div>
+      </div>
+      <div className="px-5 py-3 rounded bg-rose-100 bg-opacity-50 mx-2">
         {displayDatas?.map((podcast: Podcast) => {
           return (
             <Link

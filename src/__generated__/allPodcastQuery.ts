@@ -33,6 +33,18 @@ export interface allPodcastQuery_getAllPodcasts {
   podcasts: allPodcastQuery_getAllPodcasts_podcasts[] | null;
 }
 
+export interface allPodcastQuery_subscriptions {
+  __typename: "Podcast";
+  id: number;
+  title: string;
+  updatedAt: any;
+  rating: number;
+  category: Category;
+  coverImg: string | null;
+  description: string;
+}
+
 export interface allPodcastQuery {
   getAllPodcasts: allPodcastQuery_getAllPodcasts;
+  subscriptions: allPodcastQuery_subscriptions[];
 }

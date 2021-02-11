@@ -1,4 +1,4 @@
-import { faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarLine } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -32,7 +32,7 @@ export const Stars: React.FC<IStar> = ({ rating, small, onClick }) => {
         })}
       {Math.floor(rating) < rating && (
         <FontAwesomeIcon
-          icon={faStarHalf}
+          icon={faStarHalfAlt}
           className={`text-pink-${Math.floor(rating) + 2}00 ${textSize}`}
           onClick={handleClick(Math.ceil(rating))}
         />

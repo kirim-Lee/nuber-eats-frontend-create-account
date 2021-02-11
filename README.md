@@ -13,8 +13,8 @@ Created with CodeSandbox
 - [x] See Podcast Categories
 - [x] Search Podcasts
 - [x] See Podcast + Episodes
-- [ ] Review Podcast
+- [x] Review Podcast
 - [x] Subscribe to a Podcast
-- [ ] See Subscriptions
+- [x] See Subscriptions
 - [ ] See Feed (Episodes of Podcasts the user is subscribed to combined)
 - [x] audio play
