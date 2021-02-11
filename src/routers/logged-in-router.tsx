@@ -13,6 +13,7 @@ import { React } from '@ungap/global-this';
 import { CreateEpisode } from '../pages/create-episode';
 import { EditEpisode } from '../pages/edit-episode';
 import { EditPodcast } from '../pages/edit-podcast';
+import { UserHeader } from '../components/user-header';
 
 interface IRoute {
   path: string;
@@ -49,6 +50,7 @@ export const LoggedInRouter = () => {
 
   return (
     <Router>
+      {data?.me.role === UserRole.Listener && <UserHeader />}
       <Switch>
         {(data?.me.role === UserRole.Listener ? ClientRouter : HostRouter).map(
           (router) => (

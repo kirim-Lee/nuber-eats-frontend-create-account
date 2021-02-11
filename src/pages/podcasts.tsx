@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { MyPodcastBox } from '../components/my-podcast-box';
 import { Category, SearchPodcastsInput } from '../__generated__/globalTypes';
+
 import {
   allPodcastQuery,
   allPodcastQuery_getAllPodcasts_podcasts,

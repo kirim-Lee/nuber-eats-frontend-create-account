@@ -79,6 +79,10 @@ export interface SearchPodcastsInput {
   category?: Category | null;
 }
 
+export interface SubcribeInput {
+  ids: number[];
+}
+
 export interface ToggleSubscribeInput {
   podcastId: number;
 }
