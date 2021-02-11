@@ -29,7 +29,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://nuber-eats-assignment.herokuapp.com/graphql',
+  uri: 'wss://nuber-eats-assignment.herokuapp.com/graphql',
   // uri: 'ws://localhost:4000/graphql',
   options: {
     reconnect: true,
