@@ -19,6 +19,8 @@ export const Stars: React.FC<IStar> = ({ rating, small, onClick }) => {
   return (
     <>
       <div className="hidden">
+        <span className="text-pink-200" />
+        <span className="text-pink-300" />
         <span className="text-pink-500" />
         <span className="text-pink-600" />
         <span className="text-pink-700" />
