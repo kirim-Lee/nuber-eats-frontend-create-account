@@ -105,7 +105,7 @@ export const EditEpisode = () => {
       setUploading(true);
 
       const { url } = await (
-        await fetch('http://localhost:4000/uploads', {
+        await fetch('https://nuber-eats-assignment.herokuapp.com/uploads', {
           method: 'POST',
           body: form,
         })
